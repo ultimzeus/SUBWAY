@@ -34,7 +34,7 @@ const MENU_ITEMS: MenuItem[] = [
       mega: 22.00
     },
     category: "Pizzas",
-    image: "/pizza_3d.png",
+    image: "/pizza_margherita_premium.png",
     rating: 4.8,
   },
   {
@@ -310,10 +310,7 @@ export default function Menu() {
         </div>
 
         {/* Menu Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => {
               // Get current price & name based on size if item is a pizza
@@ -325,18 +322,18 @@ export default function Menu() {
               const cartName = isPizza ? `${item.name} (${sizeLabel})` : item.name;
               const cartId = isPizza ? `${item.id}-${pizzaSize}` : item.id;
 
-              return (
+               return (
                 <motion.div
-                  layout
+                  layout="position"
                   key={item.id}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
-                  className="glass-card flex flex-col h-full group relative"
+                  className={`glass-card group relative ${isPizza ? "menu-card-pizza" : "menu-card-standard"}`}
                 >
                   {/* Image and badge */}
-                  <div className="h-56 w-full bg-black/20 flex items-center justify-center p-6 relative overflow-hidden">
+                  <div className="h-56 w-full bg-black/20 flex items-center justify-center relative overflow-hidden p-6">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,139,71,0.05)_0%,transparent_70%)] group-hover:scale-125 transition-transform duration-500"></div>
                     
                     {item.badge && (
@@ -349,12 +346,12 @@ export default function Menu() {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="h-full object-contain filter drop-shadow-[0_8px_10px_rgba(0,0,0,0.4)] drop-shadow-[0_12px_15px_rgba(0,139,71,0.2)] group-hover:scale-115 group-hover:-rotate-3 group-hover:drop-shadow-[0_22px_28px_rgba(0,139,71,0.45)] transition-all duration-500 z-10 pointer-events-none"
+                      className="h-full transition-all duration-500 z-10 pointer-events-none object-contain filter drop-shadow-[0_8px_10px_rgba(0,0,0,0.4)] drop-shadow-[0_12px_15px_rgba(0,139,71,0.2)] group-hover:scale-115 group-hover:-rotate-3 group-hover:drop-shadow-[0_22px_28px_rgba(0,139,71,0.45)]"
                     />
                   </div>
 
                   {/* Info content */}
-                  <div className="p-6 flex flex-col flex-1">
+                  <div className="p-6 flex flex-col flex-grow" style={{ display: "flex", flexDirection: "column", flexGrow: 1, minHeight: isPizza ? "340px" : "280px" }}>
                     <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="text-[10px] font-black text-[#008b47] uppercase tracking-widest">{item.category}</span>
                       <div className="flex items-center gap-1 text-[#ffc20e] text-xs">
@@ -398,10 +395,13 @@ export default function Menu() {
                     )}
 
                     {/* Pricing and Action row */}
-                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-                      <span className="text-xl font-black text-white">
-                        {currentPrice.toFixed(2)} DT
-                      </span>
+                    <div className="flex flex-col gap-3 mt-auto pt-4 border-t border-white/5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-bold text-[#647d70]">Prix</span>
+                        <span className="text-xl font-black text-white">
+                          {currentPrice.toFixed(2)} DT
+                        </span>
+                      </div>
                       <button
                         onClick={() => addToCart({
                           id: cartId,
@@ -410,19 +410,18 @@ export default function Menu() {
                           image: item.image,
                           type: "classic"
                         })}
-                        className="glass-button-primary py-2 px-4 text-xs"
+                        className="w-full glass-button-primary py-2.5 px-4 text-xs flex items-center justify-center gap-2 cursor-pointer"
                       >
                         <ShoppingBag size={14} />
                         Ajouter
                       </button>
                     </div>
                   </div>
-
                 </motion.div>
               );
             })}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
       </div>
     </section>

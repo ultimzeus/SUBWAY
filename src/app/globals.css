@@ -194,3 +194,10 @@ button {
   position: relative;
   z-index: 10;
 }
+
+/* Menu Card Alignment Fixes */
+.menu-card-pizza, .menu-card-standard {
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+}

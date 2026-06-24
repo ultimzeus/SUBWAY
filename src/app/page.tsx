@@ -33,7 +33,7 @@ export default function Home() {
                 <Sparkles size={12} className="fill-[#008b47]" /> Fraîcheur &amp; Qualité
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white">
-                LE CONCEPT <span className="text-[#ffc20e]">SUBWAY</span>
+                LE CONCEPT <span className="text-[#ffc20e]">SUBWAY</span> <span className="text-[#008b47]">SOKRA</span>
               </h2>
               <p className="text-[#9cb1a6] text-sm sm:text-base max-w-xl">
                 Trois étapes simples pour une explosion de saveurs saines et personnalisées selon vos envies.

@@ -13,10 +13,8 @@ interface Option {
 }
 
 const BREADS: Option[] = [
-  { name: "Italien Blanc", price: 0, emoji: "🥖", color: "#e8c39e" },
   { name: "Parmesan Origan", price: 0.5, emoji: "🧀🥖", color: "#e3a857" },
   { name: "Complet Fibres", price: 0, emoji: "🌾🥖", color: "#c98f53" },
-  { name: "Avoine & Miel", price: 0.5, emoji: "🍯🥖", color: "#d29858" },
 ];
 
 const SIZES: Option[] = [
